@@ -22,21 +22,19 @@
 
             $('form').submit((e) => {
                 e.preventDefault();
-                $.getJSON("http://jsonip.com/?callback=?", function (data) {
-                    socket.emit('chat message', {
-                        hostname: data.ip,
-                        message: $('#m').val()
-                        });
-                    $('#m').val('');
-                });
-                
+                /* socket.emit('chat message', {
+                  hostname: window.location.hostname,
+                  message: $('#m').val()
+                }); */
+                $('#messages').append($('<li>').text(window.location.hostname + ": " + $('#m').val()));
+                $('#m').val('');
 
                 return false;
             })
 
-            socket.on('chat reply', (e) => {
+            /* socket.on('chat reply', (e) => {
                 $('#messages').append($('<li>').text(e.hostname + ": " + e.message));
-            })
+            }) */
         });
     </script>
   </head>
