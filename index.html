@@ -22,11 +22,14 @@
 
             $('form').submit((e) => {
                 e.preventDefault();
-                socket.emit('chat message', {
-                  hostname: window.location.hostname,
-                  message: $('#m').val()
+                $.getJSON("http://jsonip.com/?callback=?", function (data) {
+                    socket.emit('chat message', {
+                        hostname: data.ip,
+                        message: $('#m').val()
+                        });
+                    $('#m').val('');
                 });
-                $('#m').val('');
+                
 
                 return false;
             })
